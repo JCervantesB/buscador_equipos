@@ -1,0 +1,125 @@
+html {
+    font-size: 62.5%;
+}
+h1, h2, h3, h4, h5 {
+    margin: 0;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+h3 {
+    font-size: 2.4rem;
+    border-bottom: 1px solid #cfd8dc;
+    color: #ef6c00;
+}
+h4 {
+    font-size: 2.2rem;
+}
+h5 {
+    font-size: 2rem;
+}
+
+p {
+    font-size: 1.6rem;
+    margin: 0;
+}
+
+span {
+    font-weight: 600;
+}
+nav ul a {
+    font-size: 1.6rem;
+}
+nav .brand-logo {
+    margin-left: 2rem;
+}
+.card {
+    margin: 1rem;
+    border-radius: 1rem;
+}
+select {
+    display: block;
+}
+label {
+    font-size: 1.2rem;
+}
+.row .col.s12 {
+    min-height: 8rem;
+    padding: 1rem;
+}
+.row::after {
+    display: none;
+}
+
+.contenedor {
+    width: 98%;
+}
+
+.nombre {
+    font-weight: 700;
+}
+.row .col {
+    padding: 0;
+}
+td, th {
+    font-size: 1.4rem;
+}
+.navegacion a {
+    font-size: 2rem;
+    margin: 2rem 0 0 2rem;
+    color: #ef6c00;
+}
+.oculto {
+    display: none;
+}
+
+.swal {
+    display: flex;
+    flex-direction: column;
+}
+.swal2-container.swal2-backdrop-show {
+    background: rgba(0,0,0,.8) !important;
+}
+.swal2-popup.swal2-modal.swal2-show {
+    background-color: #f5f5f5;
+}
+.swal2-title {
+    margin: 0;
+    text-align: left !important;
+    font-size: 1.6rem !important;
+    font-weight: 200 !important;
+    line-height: 1.2 !important;
+}
+.swal2-title + h3 {
+    font-size: 1.8rem;
+}
+.swal2-confirm.swal2-styled {
+    padding: 1rem;
+    width: 5rem;
+    font-size: 1.6rem;
+}
+
+.boton {
+    margin: 1rem;
+    padding: 0.5rem;
+    border: 0;
+    position: right;
+    color: white;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+}
+.span {
+    margin-top: 0.5rem;
+}
+.status1 {
+    background-color: rgb(15, 196, 252);
+}
+.status2 {
+    background-color: rgb(3, 184, 3);
+}
+.status3 {
+    background-color: rgb(199, 1, 1);
+}
+.status4 {
+    background-color: rgb(243, 186, 0);
+}

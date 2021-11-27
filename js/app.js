@@ -14,20 +14,26 @@ const estado = {
     status3: 'Dañado',
     status4: 'Dado de Baja'
 }
-
+// Buscador por filtros
 const datosBusqueda = {
     categoria: '',
     marca: '',
-    empleado: '',
     departamento: '',
-    estado: '',
 }
 
-// Select filtro
-const filtro = document.querySelector('#filtro');
-filtro.addEventListener('change', (e) => {
-    console.log(e.target.value);
-});
+const filtroCategorias = document.querySelector('#categorias');
+filtroCategorias.addEventListener('change', (e) => {
+    datosBusqueda.categoria = e.target.value;
+})
+const filtroMarcas = document.querySelector('#marcas');
+filtroMarcas.addEventListener('change', (e) => {
+    datosBusqueda.marca = e.target.value;
+})
+const filtroDepartamentos = document.querySelector('#departamentos');
+filtroDepartamentos.addEventListener('change', (e) => {
+    datosBusqueda.departamento = e.target.value;
+})
+console.log(datosBusqueda);
 
 
 // API Equipos
@@ -76,6 +82,7 @@ fetch(url)
 
         listaEquipos.appendChild(contenido);
     })
+
 })
 .catch(err => console.log(err))
 
@@ -90,6 +97,7 @@ fetch(departamentos)
 
         opcionesDepartamento.appendChild(optDepartamento);
     })
+
 })
 .catch(err => console.log(err))
 
@@ -104,6 +112,7 @@ fetch(categorias)
 
         opcionesCategoria.appendChild(optCategoria);
     })
+
 })
 .catch(err => console.log(err));
 

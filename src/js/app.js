@@ -1,7 +1,7 @@
-const activos = 'http://198.251.74.213:10012/api/equipos';
-const marcas = 'http://198.251.74.213:10012/api/equipos/marcas';
-const categorias = 'http://198.251.74.213:10012/api/equipos/categorias';
-const departamentos = 'http://198.251.74.213:10012/api/departamentos';
+const activos = 'https://tic.solucioncb.com/api/equipos';
+const marcas = 'https://tic.solucioncb.com/api/equipos/marcas';
+const categorias = 'https://tic.solucioncb.com/api/equipos/categorias';
+const departamentos = 'https://tic.solucioncb.com/api/departamentos';
 
 const listaEquipos = document.querySelector('.lista-equipos');
 const opcionesCategoria = document.querySelector('#opciones-categoria');

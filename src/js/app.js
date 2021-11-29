@@ -15,10 +15,11 @@ const estado = {
     status4: 'Dado de Baja'
 }
 // Buscador por filtros
-const datosBusqueda = {
+let datosBusqueda = {
     categoria: '',
     marca: '',
     departamento: '',
+    estado: '',
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const filtroCategorias = document.querySelector('#categorias');
 filtroCategorias.addEventListener('change', (e) => {
     datosBusqueda.categoria = e.target.value;
-
+    filtrarEquipo();
 })
 const filtroMarcas = document.querySelector('#marcas');
 filtroMarcas.addEventListener('change', (e) => {
@@ -41,8 +42,27 @@ filtroMarcas.addEventListener('change', (e) => {
 const filtroDepartamentos = document.querySelector('#departamentos');
 filtroDepartamentos.addEventListener('change', (e) => {
     datosBusqueda.departamento = e.target.value;
+    filtrarEquipo();
 })
-console.log(datosBusqueda);
+const filtroEstado = document.querySelector('#estado');
+filtroDepartamentos.addEventListener('change', (e) => {
+    datosBusqueda.estado = e.target.value;
+    filtrarEquipo();
+})
+const btnBorrarFiltro = document.querySelector('#borrarFiltro');
+btnBorrarFiltro.addEventListener('click', () =>{
+    cargarEquipos();
+})
+
+const btnMosaico = document.querySelector('#mosaico');
+btnMosaico.addEventListener('click', () => {
+    mostrarMosaicos();
+})
+
+const btnLista = document.querySelector('#lista');
+btnLista.addEventListener('click', () => {
+    mostrarLista();
+})
 
 // API Equipos
 function cargarEquipos() {
@@ -113,7 +133,7 @@ function mostarEquipos(equipos) {
             contenido.setAttribute('id', equipo.id);
             contenido.innerHTML = ` 
             
-            <div class="row">
+            <div id="grid" class="row">
             <div class="col s12 m6 l4">
                 <div class="card grey lighten-5">
                 <div class="card-content">
@@ -121,29 +141,41 @@ function mostarEquipos(equipos) {
                     <span class="card-title truncate center-align">${equipo.name}</span>
                     <p id="categoria">${equipo.category_id[1]}</p>
                     <p id="departamento">${equipo.department_id[1]}</p>
-                    <p id="marca" class="oculto">${equipo.x_studio_marca[1]}</p>
-                    <p id="empleado" class="oculto">${equipo.employee_id[1]}</p>
                 </div>
                 </div>
             </div>
-            </div>          
+            </div> 
+            
+            <div id="listado" class="row oculto">
+                <div class="col s12>
+                    <div class="lista">
+                        <p class="truncate parrafoLista">
+                            <span>[${equipo.code}] </span>
+                            ${equipo.name}, 
+                            <span>Categoria:</span> ${equipo.category_id[1]},
+                            <span>Departamento:</span> ${equipo.department_id[1]}
+                            <span>Asignado a:</span> ${equipo.employee_id[1] ? equipo.employee_id[1] : ''}
+                        </p>
+                    </div>
+                </div>
+            </div>
             `;
 
             contenido.addEventListener('click', function() {
                 Swal.fire(`
                 <div class="swal">
-                <h3>${equipo.code}</h3>
+                <h3>${equipo.code ? equipo.code : ''}</h3>
                 <h4>${equipo.name}</h3>
                 <span>Categoría:</span> ${equipo.category_id[1]}
-                <span>Marca:</span> ${equipo.x_studio_marca[1]}
-                <span>Modelo:</span> ${equipo.model}
-                <span>Serie:</span> ${equipo.serial_no}
+                <span>Marca:</span> ${equipo.x_studio_marca[1] ? equipo.x_studio_marca[1] : ''}
+                <span>Modelo:</span> ${equipo.model ? equipo.model : ''}
+                <span>Serie:</span> ${equipo.serial_no ? equipo.serial_no : ''}
                 <input type="button" class="boton ${equipo.x_studio_selection_field_shlje}" value="${estado[equipo.x_studio_selection_field_shlje]}"">
                 
                 <h3>Información de uso</h3>
-                <span>Asignado a:</span> ${equipo.employee_id[1]}
-                <span>Departamento:</span> ${equipo.department_id[1]}
-                <span>Unicación:</span> ${equipo.x_studio_ubicacion[1]}
+                <span>Asignado a:</span> ${equipo.employee_id[1] ? equipo.employee_id[1] : ''}
+                <span>Departamento:</span> ${equipo.department_id[1] ? equipo.department_id[1] : ''}
+                <span>Unicación:</span> ${equipo.x_studio_ubicacion[1] ? equipo.x_studio_ubicacion[1] : ''}
                 </div>
                 `)
             });
@@ -162,13 +194,73 @@ function filtrarEquipo() {
     fetch(activos)
     .then(respuesta => respuesta.json())
     .then(equipos => {
-        const resultado = equipos.filter( equipo => {
-            if( equipo.x_studio_marca ) { 
-                return equipo.x_studio_marca[0] === parseInt(datosBusqueda.marca);
-            }
-            return equipo;
-        })
-        mostarEquipos(resultado);
+        const resultado = equipos.filter(filtrarCategoria).filter(filtrarMarca).filter(filtrarDepartamento);
+
+        function filtrarMarca(equipo) {
+            const {marca} = datosBusqueda;
+                if( marca ) { 
+                    return equipo.x_studio_marca[0] === parseInt(marca);
+                }
+                return equipo;
+        }
+
+        function filtrarCategoria(equipo) {
+            const {categoria} = datosBusqueda;
+                if( categoria ) { 
+                    return equipo.category_id[0] === parseInt(categoria);
+                }
+                return equipo;
+        }
+
+        function filtrarDepartamento(equipo) {
+            const {departamento} = datosBusqueda;
+                if( departamento ) { 
+                    return equipo.department_id[0] === parseInt(departamento);
+                }
+                return equipo;
+        }
+
+        if(resultado.length) {
+            mostarEquipos(resultado);
+        } else {
+            noResultado();
+        }
     })
     .catch(err => console.log(err))
+}
+
+function noResultado() {
+    limpiarHTML();
+
+    const noResultado = document.createElement('DIV');
+    noResultado.classList.add('alerta', 'error');
+    noResultado.textContent = 'No hay resultados, intenta con otros terminos de búsqueda';
+    listaEquipos.appendChild(noResultado);
+}
+
+function mostrarMosaicos() {
+    const grid = document.querySelectorAll("#grid");
+
+    for (let i = 0; i < grid.length; i++) {
+        grid[i].classList.remove("oculto");
+    }
+
+    const listado = document.querySelectorAll('#listado');
+    for (let i = 0; i < listado.length; i++) {
+        listado[i].classList.add("oculto");
+    }
+}
+
+function mostrarLista() {
+    const grid = document.querySelectorAll("#grid");
+
+    for (let i = 0; i < grid.length; i++) {
+        grid[i].classList.add("oculto");
+    }
+
+    const listado = document.querySelectorAll('#listado');
+    for (let i = 0; i < listado.length; i++) {
+        listado[i].classList.remove("oculto");
+    }
+    
 }

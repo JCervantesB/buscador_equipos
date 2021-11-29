@@ -33,6 +33,15 @@ nav ul a {
 nav .brand-logo {
     margin-left: 2rem;
 }
+nav .brand-logo{
+    display: flex !important;
+}
+.nav-wrapper {
+    background-color: #ef6c00;
+}
+.logo {
+    width: 10rem;
+}
 .card {
     margin: 1rem;
     border-radius: 1rem;
@@ -71,6 +80,17 @@ td, th {
 .oculto {
     display: none;
 }
+.col.s12\>.\<div.class\= {
+    width: 100%;
+}
+.parrafoLista {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 0.5rem 0;
+    width: 100%;
+}
+.parrafoLista:hover {
+    background-color: #fff3e0;
+}
 
 .swal {
     display: flex;
@@ -107,6 +127,19 @@ td, th {
     border-radius: 0.5rem;
     text-transform: uppercase;
 }
+.boton:hover {
+    cursor: pointer;
+}
+.borrarFiltro {
+    background-color: #ef6c00;
+    padding: 1rem;
+}
+
+.vista {
+    background-color: teal;
+    padding: 1rem;
+}
+
 .span {
     margin-top: 0.5rem;
 }
@@ -121,4 +154,13 @@ td, th {
 }
 .status4 {
     background-color: rgb(243, 186, 0);
+}
+
+.alerta {
+    padding: 1rem;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: red;
+    font-size: 2rem;
 }

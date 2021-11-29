@@ -51,6 +51,7 @@ select {
 }
 label {
     font-size: 1.2rem;
+    color: black !important;
 }
 .row .col.s12 {
     padding: 1rem;

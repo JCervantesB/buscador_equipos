@@ -127,8 +127,8 @@ function cargarMarcas() {
 function mostarEquipos(equipos) {
     limpiarHTML();
     
-    equipos.forEach(equipo => {     
-
+    let n = 1;
+    equipos.forEach(equipo => {    
             const contenido = document.createElement('DIV');
             contenido.setAttribute('id', equipo.id);
             contenido.innerHTML = ` 
@@ -139,8 +139,8 @@ function mostarEquipos(equipos) {
                 <div class="card-content">
                     <h3>${equipo.code}</h3>
                     <span class="card-title truncate center-align">${equipo.name}</span>
-                    <p id="categoria">${equipo.category_id[1]}</p>
-                    <p id="departamento">${equipo.department_id[1]}</p>
+                    <p id="categoria">${equipo.category_id[1] ? equipo.category_id[1] : ''}</p>
+                    <p id="departamento">${equipo.department_id[1] ? equipo.department_id[1] : ''}</p>
                 </div>
                 </div>
             </div>
@@ -150,10 +150,11 @@ function mostarEquipos(equipos) {
                 <div class="col s12>
                     <div class="lista">
                         <p class="truncate parrafoLista">
+                            <span class="noSelect">${n++} .-</span>
                             <span>[${equipo.code}] </span>
                             ${equipo.name}, 
-                            <span>Categoria:</span> ${equipo.category_id[1]},
-                            <span>Departamento:</span> ${equipo.department_id[1]}
+                            <span>Categoria:</span> ${equipo.category_id[1] ? equipo.category_id[1] : ''},
+                            <span>Departamento:</span> ${equipo.department_id[1] ? equipo.department_id[1] : ''}
                             <span>Asignado a:</span> ${equipo.employee_id[1] ? equipo.employee_id[1] : ''}
                         </p>
                     </div>
@@ -166,7 +167,7 @@ function mostarEquipos(equipos) {
                 <div class="swal">
                 <h3>${equipo.code ? equipo.code : ''}</h3>
                 <h4>${equipo.name}</h3>
-                <span>Categoría:</span> ${equipo.category_id[1]}
+                <span>Categoría:</span> ${equipo.category_id[1] ? equipo.category_id[1] : ''}
                 <span>Marca:</span> ${equipo.x_studio_marca[1] ? equipo.x_studio_marca[1] : ''}
                 <span>Modelo:</span> ${equipo.model ? equipo.model : ''}
                 <span>Serie:</span> ${equipo.serial_no ? equipo.serial_no : ''}
@@ -175,7 +176,7 @@ function mostarEquipos(equipos) {
                 <h3>Información de uso</h3>
                 <span>Asignado a:</span> ${equipo.employee_id[1] ? equipo.employee_id[1] : ''}
                 <span>Departamento:</span> ${equipo.department_id[1] ? equipo.department_id[1] : ''}
-                <span>Unicación:</span> ${equipo.x_studio_ubicacion[1] ? equipo.x_studio_ubicacion[1] : ''}
+                <span>Ubicación:</span> ${equipo.x_studio_ubicacion[1] ? equipo.x_studio_ubicacion[1] : ''}
                 </div>
                 `)
             });

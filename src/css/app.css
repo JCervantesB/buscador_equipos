@@ -30,11 +30,17 @@ span {
 nav ul a {
     font-size: 1.6rem;
 }
-nav .brand-logo {
-    margin-left: 2rem;
-}
 nav .brand-logo{
-    display: flex !important;
+    font-size: 1.6rem ;
+    font-weight: 700;
+}
+@media (min-width: 385px) {
+    nav .brand-logo{
+        font-size: 2rem ;
+    }
+}
+.noSelect {
+    user-select: none;
 }
 .nav-wrapper {
     background-color: #ef6c00;
@@ -137,7 +143,7 @@ td, th {
 }
 
 .vista {
-    background-color: teal;
+    background-color: #26a69a;
     padding: 1rem;
 }
 
